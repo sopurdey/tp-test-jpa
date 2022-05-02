@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS LIVRE ;
+create table LIVRE (ID integer(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, TITRE varchar(255) NOT NULL, AUTEUR varchar(50) NOT NULL);
+insert into LIVRE VALUES (1, 'Vingt mille lieues sous les mers', 'Jules Verne');
+insert into LIVRE VALUES (2, 'Germinal', 'Emile Zola');
+insert into LIVRE VALUES (3, 'Guerre et paix', 'Léon Tolstoï');
+insert into LIVRE VALUES (4, 'Apprendre à parler aux animaux', 'Gaston Pouet');
+insert into LIVRE VALUES (5, '1001 recettes de Cuisine', 'Jean-Pierre Coffe');
