@@ -1,28 +1,30 @@
 package fr.diginamic.jpa.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "livre")
+@NamedQueries({ @NamedQuery(name = "Emprunt.getBooks", query = "SELECT l FROM Livre l WHERE :emprunt MEMBER OF l.loans") })
 public class Livre {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "TITRE")
+	@Column(name = "TITRE", length = 255, nullable = false)
 	private String title;
 
-	@Column(name = "AUTEUR")
+	@Column(name = "AUTEUR", length = 50, nullable = false)
 	private String author;
 
-	public Livre() {
+	@ManyToMany(mappedBy = "books")
+	private Set<Emprunt> loans;
 
+	public Livre() {
+		loans = new HashSet<>();
 	}
 
 	public Integer getId() {
@@ -47,6 +49,19 @@ public class Livre {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public Set<Emprunt> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(Set<Emprunt> loans) {
+		this.loans = loans;
+	}
+
+	@Override
+	public String toString() {
+		return "Livre [id=" + id + ", title=" + title + "]";
 	}
 
 }
